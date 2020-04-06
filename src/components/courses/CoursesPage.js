@@ -29,31 +29,83 @@ class CoursesPage extends Component {
     }
   }
 
+  // render() {
+  //   return (
+  //     <>
+  //       {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
+  //       <h2>Courses</h2>
+
+  //       {this.props.courses.length === 0 ? (
+  //         <Spinner />
+  //       ) : (
+  //         <>
+  //           <button
+  //             className="btn btn-primary add-course"
+  //             style={{ marginBottom: 20 }}
+  //             onClick={() => this.setState({ redirectToAddCoursePage: true })}
+  //           >
+  //             Add Course
+  //           </button>
+  //           <CourseList courses={this.props.courses} />
+  //         </>
+  //       )}
+  //     </>
+  //   );
+  // }
+
   render() {
     return (
       <>
         {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
         <h2>Courses</h2>
-        <Spinner />
 
-        <button
-          className="btn btn-primary add-course"
-          style={{ marginBottom: 20 }}
-          onClick={() => this.setState({ redirectToAddCoursePage: true })}
-        >
-          Add Course
-        </button>
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <button
+              className="btn btn-primary add-course"
+              style={{ marginBottom: 20 }}
+              onClick={() => this.setState({ redirectToAddCoursePage: true })}
+            >
+              Add Course
+            </button>
 
-        <CourseList courses={this.props.courses} />
+            <CourseList courses={this.props.courses} />
+          </>
+        )}
       </>
     );
   }
+
+  // render() {
+  //   return (
+  //     <>
+  //       {this.state.redirectToAddCoursePage && <Redirect to="/course" />}
+  //       <h2>Courses</h2>
+
+  //       <button
+  //         className="btn btn-primary add-course"
+  //         style={{ marginBottom: 20 }}
+  //         onClick={() => this.setState({ redirectToAddCoursePage: true })}
+  //       >
+  //         Add Course
+  //       </button>
+  //       {this.props.courses.length ? (
+  //         <CourseList courses={this.props.courses} />
+  //       ) : (
+  //         <Spinner />
+  //       )}
+  //     </>
+  //   );
+  // }
 }
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
   authors: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => {
@@ -67,7 +119,8 @@ const mapStateToProps = state => {
               authorName: state.authors.find(a => a.id === course.authorId).name
             };
           }),
-    authors: state.authors
+    authors: state.authors,
+    loading: state.apiCallsInProgress > 0
   };
 };
 
