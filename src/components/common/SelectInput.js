@@ -7,7 +7,7 @@ const SelectInput = ({
   onChange,
   defaultOption,
   value,
-  error,
+  errors,
   options
 }) => {
   return (
@@ -30,7 +30,7 @@ const SelectInput = ({
             );
           })}
         </select>
-        {error && <div className="alert alert-danger">{error}</div>}
+        {errors && <div className="alert alert-danger">{errors}</div>}
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ SelectInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   defaultOption: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  error: PropTypes.string,
+  errors: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object)
 };
 

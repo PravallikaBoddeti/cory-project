@@ -14,6 +14,7 @@ const CourseForm = ({
   return (
     <form onSubmit={onSave}>
       <h2>{course.id ? "Edit" : "Add"} Course </h2>
+
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -26,7 +27,6 @@ const CourseForm = ({
         onChange={onChange}
         errors={errors.title}
       />
-
       <SelectInput
         name="authorId"
         label="Author"
@@ -39,7 +39,6 @@ const CourseForm = ({
         onChange={onChange}
         errors={errors.author}
       />
-
       <TextInput
         name="category"
         label="Category"

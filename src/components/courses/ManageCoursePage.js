@@ -68,9 +68,9 @@ const ManageCoursePage = ({
         toast.success("Course Saved");
         history.push("/courses");
       })
-      .catch(err => {
+      .catch(error => {
         setSaving(false);
-        setErrors({ onSave: err.message });
+        setErrors({ onSave: error.message });
       });
   };
 
