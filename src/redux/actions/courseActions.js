@@ -43,6 +43,7 @@ export const loadCourses = () => {
 };
 
 export const saveCourse = course => {
+  // eslint-disable-next-line no-unused-vars
   return (dispatch, getState) => {
     dispatch(beginApiCall());
     return courseApi
